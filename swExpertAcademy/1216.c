@@ -52,10 +52,12 @@ int main(void){
   int ii, jj, kk;
   int circular;
   int circular_count;
+  int max_count;
 
   for( ii = 1; ii <= 10; ii++){
 
     memset(field, 0x00, sizeof(field));
+    max_count = 0;
 
     scanf("%d", &circular);
     getchar();
@@ -64,7 +66,15 @@ int main(void){
       getchar();
     }
 
-    circular_count = findSameWord(circular);
-    printf("#%d %d\n", ii, circular_count);
+    for( jj = 1; jj < MATRIX_SIZE-1; jj++ ){
+
+      circular_count = findSameWord(jj);
+      if( circular_count != 0 ){
+        if( max_count <= jj )
+          max_count = jj;
+      }
+    }
+
+    printf("#%d %d\n", ii, max_count);
   }
 }
