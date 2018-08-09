@@ -34,7 +34,6 @@ void quick(int *arr, int start, int end){
 
 }
 
-
 int data[10] = {5,1,9,2,8,3,7,6,4,0};
 
 int main(void){
