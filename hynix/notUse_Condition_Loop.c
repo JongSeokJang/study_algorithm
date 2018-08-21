@@ -3,7 +3,8 @@
 #define CHAR_BIT 1
 
 int cal(int x){
-  return ( x+ (x>>31)) ^ (x >> 31);
+  int mask = x >> 31; // 0(0000000000000) or -1(1111111111111)
+  return  (x+ (mask)) ^ mask;
 }
 
 int main(void){
