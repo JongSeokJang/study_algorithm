@@ -41,6 +41,17 @@ int stackPop(stackStruct *stack){
   else
     return stack->data[(stack->stackTop)--];
 }
+  
+void printField(int (*field)[MAX_SIZE],int max_height,int n){
+  int ii, jj;
+
+  for( ii = 0; ii < max_height; ii++){
+    for( jj = 0; jj < n; jj++)
+      printf("[%d]", field[ii][jj]);
+    printf("\n");
+  }
+  printf("\n");
+}
 
 // Using Stack, Find Max quadrangle's area
 int maxArea(int *hist, int n){
@@ -54,6 +65,7 @@ int maxArea(int *hist, int n){
   int field_area[MAX_SIZE][MAX_SIZE] = {0};
 
 
+  // make field
   for( jj = 0; jj < n; jj++){
     height = hist[jj];
     for( ii = 0; ii < height; ii++)
@@ -63,8 +75,8 @@ int maxArea(int *hist, int n){
       max_height = height;
   }
 
-
-
+  // calculate field_area
+  max = 0;
   for(ii = 0 ; ii < max_height; ii++){
     for( jj = 0; jj < n; jj++){
       sum = 0;
@@ -80,43 +92,23 @@ int maxArea(int *hist, int n){
       if( kk == n )
         field_area[ii][jj] = (ii + 1) * sum;
       
-    }
-  } 
 
-
-
-  // View for Check
-  for( ii = 0; ii < max_height; ii++){
-    for( jj = 0; jj < n; jj++)
-      printf("[%d]", field[ii][jj]);
-    printf("\n");
-  }
-  printf("\n");
-
-  
-  max = 0;
-  for( ii = 0; ii < max_height; ii++){
-    for( jj = 0; jj < n; jj++){
-      printf("[%d]", field_area[ii][jj]);
       if( max < field_area[ii][jj])
         max = field_area[ii][jj];
     }
-    printf("\n");
-  }
-  printf("\n");
+  } 
+
+  printField(field, max_height, n);
+  printField(field_area, max_height, n);
 
   return max;
-
 }
 
 
 int main(void){
 
-  int hist[6] = {2,1,6,5,3,2};
-  printf("max : [%d]\n", maxArea(hist, 6));
-
-
-
+  int hist1[6] = {2,1,6,5,3,2};
+  printf("max : [%d]\n", maxArea(hist1, 6));
 
 
 }
